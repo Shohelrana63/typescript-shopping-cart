@@ -16,9 +16,9 @@
 
 ## Hosting Platform
    - Netlify
-   
+
 ## ([Live Website](https://shopping-cart-srb.netlify.app/))
 
 ## User Interface(UI)
-![](UI/Shopping-Cart.jpg)
+![](UI/ShoppingCart.jpg)
 ![](UI/Total.PNG)
