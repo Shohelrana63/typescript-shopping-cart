@@ -34,17 +34,41 @@ const App = () => {
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0);
 
-  const handleAddToCart = (clickedItem: CartItemType) => null;
+  const handleAddToCart = (clickedItem: CartItemType) => {
+    setCartItems(prev => {
+      const isItemInCart = prev.find(item => item.id === clickedItem.id);
+      if (isItemInCart) {
+        return prev.map(item =>
+          item.id === clickedItem.id
+            ? { ...item, amount: item.amount + 1 } : item
+        );
+      }
+      return [...prev, { ...clickedItem, amount: 1 }];
+    });
+  };
 
-  const handleRemoveFromCart = () => null;
+  const handleRemoveFromCart = (id: number) => {
+    setCartItems(prev =>
+      prev.reduce((ack, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return ack;
+          return [...ack, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...ack, item];
+        }
+      }, [] as CartItemType[])
+    );
+  };
 
   if (isLoading)
-    return <div style={{ textAlign: 'center', marginTop: '300px' }}>
+    return <div style={{ textAlign: 'center', marginTop: '250px' }}>
       <CircularProgress color="secondary" />
     </div>
   if (error) return <div>Something Went Wrong ...!</div>
+
   return (
-    <div style={{ background: "#1d1d1d" }}>
+    <div>
+      <h1>Shopping cart</h1>
       <Wrapper>
         <Drawer anchor='right'
           open={cartOpen}
@@ -57,7 +81,7 @@ const App = () => {
         </Drawer>
         <StyledButton onClick={() => setCartOpen(true)}>
           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-            <AddShoppingCartIcon color='primary' />
+            <AddShoppingCartIcon color="secondary" />
           </Badge>
         </StyledButton>
         <Grid container spacing={3} >

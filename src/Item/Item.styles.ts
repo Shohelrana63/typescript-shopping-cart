@@ -10,7 +10,8 @@ export const Wrapper = styled.div`
   height: 100%;
   button {
     border-radius: 0 0 20px 20px;
-    color:white
+    color:rgba(248, 9, 121, 0.993);
+    font-weight: bold
   }
   img {
     max-height: 200px;
@@ -18,7 +19,7 @@ export const Wrapper = styled.div`
     border-radius: 20px 20px 0 0;
   }
   div {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 1rem;
     height: 100%;
   }
